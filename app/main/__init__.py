@@ -11,6 +11,6 @@ def create_app(override=None):
 
     @app.route('/')  # decorator 를 통해 라우팅 경로를 지정
     def hello_world():
-        return 'Hello, World!'
-
+        return str(app.config['ENV']) + '|' + str(app.config['DEBUG']) + '|' + str(app.config['TESTING'])
+        # return 'Hello, World!'
     return app
