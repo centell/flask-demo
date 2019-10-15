@@ -1,6 +1,7 @@
+import os
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
+from sqlalchemy import engine_from_config, create_engine, pool
 from sqlalchemy import pool
 
 from alembic import context
@@ -25,6 +26,15 @@ target_metadata = None
 # ... etc.
 
 
+def get_database_url():
+    return "mysql+pymysql://%s:%s@%s/%s" % (
+        os.getenv("MYSQL_USER", "homestead"),
+        os.getenv("MYSQL_PASSWORD", "secret"),
+        os.getenv("MYSQL_HOSTNAME", "localhost"),
+        os.getenv("MYSQL_DATABASE", "homestead"),
+    )
+
+
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
 
@@ -37,7 +47,8 @@ def run_migrations_offline():
     script output.
 
     """
-    url = config.get_main_option("sqlalchemy.url")
+    # url = config.get_main_option("sqlalchemy.url")
+    url = get_database_url()
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -56,11 +67,12 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
+    # connectable = engine_from_config(
+    #     config.get_section(config.config_ini_section),
+    #     prefix="sqlalchemy.",
+    #     poolclass=pool.NullPool,
+    # )
+    connectable = create_engine(get_database_url())
 
     with connectable.connect() as connection:
         context.configure(
