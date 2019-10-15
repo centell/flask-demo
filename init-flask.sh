@@ -20,60 +20,15 @@ pip3 install -r environments/requirements" > environments/init.sh
 # python script files
 echo "" > run.py
 # .gitignore
-echo "# Environments
-.venv
-.idea
-
-# Byte-compiled / optimized / DLL files
+echo "
+.env
+.git/
+.idea/
+node_modules/
+.venv/
 __pycache__/
-*.py[cod]
-
-# C extensions
-*.so
-
-# Distribution / packaging
-bin/
-build/
-develop-eggs/
-dist/
-eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-.tox/
-.coverage
-.cache
-nosetests.xml
-coverage.xml
-
-# Translations
-*.mo
-
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
-
-# Rope
-.ropeproject
-
-# Django stuff:
-*.log
-*.pot
-
-# Sphinx documentation
-docs/_build/"> .gitignore
+.pytest_cache/
+*.pyc"> .gitignore
 # Run init script
 source environments/init.sh
 pip3 install flask
