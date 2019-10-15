@@ -4,7 +4,6 @@ mkdir environments
 mkdir -p app/main/controllers
 mkdir -p app/main/models
 mkdir -p app/test
-touch app/__init__.py
 touch app/main/__init__.py
 touch app/main/controllers/__init__.py
 touch app/main/models/__init__.py
