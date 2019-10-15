@@ -27,14 +27,13 @@ TESTING = config('TESTING')
 HOST = config('HOST')
 PORT = config('PORT')
 
+# Database Configuration
 MYSQL_DATABASE = config('MYSQL_DATABASE')
 MYSQL_USER = config('MYSQL_USER')
 MYSQL_ROOT_PASSWORD = config('MYSQL_ROOT_PASSWORD')
 MYSQL_PASSWORD = config('MYSQL_PASSWORD')
 MYSQL_PORT = config('MYSQL_PORT')
 MYSQL_HOSTNAME = config('MYSQL_HOSTNAME')
-
-# SQL ALCHEMY Configuration
 
 # System Variable Configuration
 
