@@ -34,14 +34,3 @@ MYSQL_ROOT_PASSWORD = config('MYSQL_ROOT_PASSWORD')
 MYSQL_PASSWORD = config('MYSQL_PASSWORD')
 MYSQL_PORT = config('MYSQL_PORT')
 MYSQL_HOSTNAME = config('MYSQL_HOSTNAME')
-
-# System Variable Configuration
-
-# Error Messages
-SIGN_IN_ERRORS = dict(
-    SUCCESS='성공',
-    WRONG_PASSWORD='비밀번호가 일치하지 않습니다.',
-    WRONG_OTP='OTP 인증번호를 확인해주십시오.',
-    BLOCKED_SIGN_IN='접근이 차단되었습니다.',
-    INACTIVATED='존재하지 않는 회원입니다.'
-)

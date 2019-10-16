@@ -1,10 +1,9 @@
-import os
 from logging.config import fileConfig
-
-from sqlalchemy import engine_from_config, create_engine, pool
-from sqlalchemy import pool
-
+from sqlalchemy import create_engine
 from alembic import context
+from os.path import abspath, dirname
+from sys import path
+path.append(dirname(dirname(abspath(__file__))))  #
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -26,29 +25,8 @@ target_metadata = None
 # ... etc.
 
 
-def get_database_url():
-    return "mysql+pymysql://%s:%s@%s/%s" % (
-        os.getenv("MYSQL_USER", "homestead"),
-        os.getenv("MYSQL_PASSWORD", "secret"),
-        os.getenv("MYSQL_HOSTNAME", "localhost"),
-        os.getenv("MYSQL_DATABASE", "homestead"),
-    )
-
-
 def run_migrations_offline():
-    """Run migrations in 'offline' mode.
-
-    This configures the context with just a URL
-    and not an Engine, though an Engine is acceptable
-    here as well.  By skipping the Engine creation
-    we don't even need a DBAPI to be available.
-
-    Calls to context.execute() here emit the given string to the
-    script output.
-
-    """
-    # url = config.get_main_option("sqlalchemy.url")
-    url = get_database_url()
+    url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -67,12 +45,9 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
-    # connectable = engine_from_config(
-    #     config.get_section(config.config_ini_section),
-    #     prefix="sqlalchemy.",
-    #     poolclass=pool.NullPool,
-    # )
-    connectable = create_engine(get_database_url())
+    from database.connection import engine
+
+    connectable = engine
 
     with connectable.connect() as connection:
         context.configure(
