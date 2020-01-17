@@ -1,5 +1,4 @@
-from alembic import command, config
-from flask import Flask
+from flask import Flask, jsonify
 import logging
 import logging.handlers
 
@@ -12,15 +11,20 @@ def create_app(override=None):
     if override:
         app.config.update(override)
 
-    # database connection
-
     # logging
     if not (app.config['DEBUG'] or app.config['TESTING']):
         handler = logging.handlers.RotatingFileHandler('/var/log/flask/flask.log')
         app.logger.addHandler(handler)
 
-    @app.route('/')  # decorator 를 통해a 라우팅 경로를 지정
+    # routers
+    from app.main.controllers.users_controller import api_users
+    @app.route('/')  # decorator 를 통해 라우팅 경로를 지정
     def hello_world():
         return str(app.config['ENV']) + '|' + str(app.config['DEBUG']) + '|' + str(app.config['TESTING'])
         # return 'Hello, World!'
+
+    @app.route('/api/test')
+    def api_test():
+        return api_users()
+
     return app

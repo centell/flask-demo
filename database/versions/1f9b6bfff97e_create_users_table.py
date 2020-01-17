@@ -18,8 +18,8 @@ depends_on = None
 
 def upgrade():
     op.create_table(
-        'Users',
-        sa.Column('id', su.types.uuid.UUIDType, nullable=False),
+        'users',
+        sa.Column('id', sa.INTEGER(), nullable=False),
         sa.Column('username', sa.VARCHAR(length=100), nullable=False),
         sa.Column('password', sa.CHAR(length=41), nullable=False),
         sa.Column('name', sa.VARCHAR(length=30), nullable=False),
